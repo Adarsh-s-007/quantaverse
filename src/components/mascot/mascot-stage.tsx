@@ -777,7 +777,7 @@ export function MascotStage() {
                   <div className="mt-2.5 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
                     {speech.offer && (
                       <span className="flex items-center gap-1.5 font-mono text-[11px] tracking-[0.12em] text-filament uppercase">
-                        tap me to ask <span aria-hidden>&rarr;</span>
+                        tap the cat to ask <span aria-hidden>&rarr;</span>
                       </span>
                     )}
                     {speech.tour && (
