@@ -48,11 +48,6 @@ const GUIDE: Record<string, Line> = {
     eyebrow: "the workbench",
     ask: "What does my circuit do?",
   },
-  "/lab": {
-    text: "Everything here reads one statevector — the gyroscopes, the graded checks and the telemetry cannot disagree.",
-    eyebrow: "the lab",
-    ask: "Are my two qubits entangled?",
-  },
   "/algorithms": {
     text: "Every algorithm here actually runs, a stage at a time. Ask me which is worth your time first.",
     eyebrow: "the shelf",

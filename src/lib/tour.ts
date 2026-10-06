@@ -93,12 +93,6 @@ export const TOUR: TourStop[] = [
     text: "Edit the Qiskit and the board redraws itself. Build from code runs anything the board can't draw.",
   },
   {
-    route: "/lab",
-    target: "lab",
-    title: "The lab",
-    text: "Two qubits you can steer by hand, with every gauge and graded check reading the same state.",
-  },
-  {
     route: "/network",
     target: "hub",
     title: "The hub",

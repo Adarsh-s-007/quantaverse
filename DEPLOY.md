@@ -44,8 +44,8 @@ NEXT_PUBLIC_API_URL = https://<your-api-host>
 
 It is read at build time, so redeploy after changing it.
 
-**The site works without the API.** The landing page, the curriculum, the
-sandbox and the whole of `/lab` run entirely in the browser on the TypeScript
+**The site works without the API.** The landing page, the curriculum and the
+sandbox run entirely in the browser on the TypeScript
 statevector simulator. Only the account-backed parts need the API: sign-in, the
 dashboard's live record, professors' classes and uploaded notes, Qiskit-backed
 grading, and the AI tutor. Without it those show an honest "cannot reach the

@@ -27,7 +27,6 @@ const LINKS = [
   { href: "/curriculum", label: "Curriculum" },
   { href: "/algorithms", label: "Algorithms" },
   { href: "/sandbox", label: "Sandbox" },
-  { href: "/lab", label: "Lab" },
   { href: "/network", label: "Hub" },
   { href: "/dashboard", label: "Dashboard" },
 ];
@@ -38,12 +37,8 @@ const TEACHING = { href: "/professor", label: "Teaching" };
 export function SiteNav() {
   const pathname = usePathname();
   const { user } = useAuth();
-  /* A professor also loses the graded lab: it is a student's page, where the
-     only thing to do is be marked. */
-  const links =
-    user?.role === "professor"
-      ? [...LINKS.filter((link) => link.href !== "/lab"), TEACHING]
-      : LINKS;
+  /* A professor gets the teaching page as well. */
+  const links = user?.role === "professor" ? [...LINKS, TEACHING] : LINKS;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [route, setRoute] = useState(pathname);
