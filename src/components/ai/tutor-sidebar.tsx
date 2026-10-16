@@ -21,7 +21,6 @@ import {
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  API_BASE,
   ApiError,
   fetchHealth,
   streamTutor,
@@ -226,10 +225,6 @@ export function TutorSidebar() {
     challengeSlug: null,
   });
   const [health, setHealth] = useState<HealthResponse | null>(null);
-  /* Whether the probe has answered yet. Until it has, the panel does not know
-     the service is missing — and showing "offline" for the second it took to
-     find out told people to start an API that was already running. */
-  const [probed, setProbed] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [busy, setBusy] = useState(false);
 
@@ -258,10 +253,7 @@ export function TutorSidebar() {
     const controller = new AbortController();
     fetchHealth(controller.signal)
       .then(setHealth)
-      .catch(() => setHealth(null))
-      .finally(() => {
-        if (!controller.signal.aborted) setProbed(true);
-      });
+      .catch(() => setHealth(null));
     return () => controller.abort();
   }, [open, health]);
 
@@ -425,13 +417,6 @@ export function TutorSidebar() {
   );
   const suggestions = hasCircuit ? CIRCUIT_SUGGESTIONS : TUTOR_SUGGESTIONS;
   const live = health?.tutor?.live;
-  const status = !health
-    ? probed
-      ? "offline · start the API"
-      : "connecting…"
-    : live
-      ? `${health.tutor.model} · streaming`
-      : "local read-out · Qiskit";
 
   return (
     <>
@@ -483,14 +468,6 @@ export function TutorSidebar() {
               </span>
               <div className="min-w-0">
                 <p className="truncate text-[13px] font-semibold">Tutor</p>
-                <p
-                  className={cn(
-                    "truncate font-mono text-[11px] tracking-[0.14em] uppercase",
-                    health ? "text-filament" : "text-frost",
-                  )}
-                >
-                  {status}
-                </p>
               </div>
               <button
                 type="button"
@@ -606,15 +583,6 @@ export function TutorSidebar() {
                   </button>
                 )}
               </form>
-              <p className="mt-2 font-mono text-[11px] leading-relaxed text-frost">
-                {health
-                  ? live
-                    ? "Explanations are generated. Verify anything you plan to submit."
-                    : "No model key on the server, so answers are computed from your circuit."
-                  : probed
-                    ? `No tutor service at ${API_BASE}. The sandbox still works without it.`
-                    : "Looking for the tutor service…"}
-              </p>
             </div>
           </motion.aside>
         )}
